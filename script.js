@@ -12,7 +12,6 @@ function generateMeal() {
         const mealCategory = meal.meals[0].strCategory;
         const mealArea = meal.meals[0].strArea;
 
-        // ingredients
         const mealIngredient1 = meal.meals[0].strIngredient1;
         const mealIngredient2 = meal.meals[0].strIngredient2;
         const mealIngredient3 = meal.meals[0].strIngredient3;
@@ -34,6 +33,43 @@ function generateMeal() {
         const mealIngredient19 = meal.meals[0].strIngredient19;
         const mealIngredient20 = meal.meals[0].strIngredient20;
 
+        const ingredientsArr = [
+            mealIngredient1,
+            mealIngredient2,
+            mealIngredient3,
+            mealIngredient4,
+            mealIngredient5,
+            mealIngredient6,
+            mealIngredient7,
+            mealIngredient8,
+            mealIngredient9,
+            mealIngredient10,
+            mealIngredient11,
+            mealIngredient12,
+            mealIngredient13,
+            mealIngredient14,
+            mealIngredient15,
+            mealIngredient16,
+            mealIngredient17,
+            mealIngredient18,
+            mealIngredient19,
+            mealIngredient20,
+        ];
+
+        const ingredientsArrNoNull = [];
+
+        ingredientsArr.forEach((el) => {
+            if (el == "" || el == null) {
+                return false;
+            } else {
+                const lastIndexOfEl = ingredientsArr.lastIndexOf(el);
+
+                ingredientsArr.slice(lastIndexOfEl);
+
+                ingredientsArrNoNull.push(el);
+            }
+        });
+
         const mealName = meal.meals[0].strMeal;
         const mealInstruction = meal.meals[0].strInstructions;
 
@@ -50,26 +86,6 @@ function generateMeal() {
             <section class="ingredients">
                 <h2 class="ingredientsTitle">Ingredients:</h2>
                 <ul class="ingredientsUl">
-                    <li class="ingredientsLi">${mealIngredient1}</li>
-                    <li class="ingredientsLi">${mealIngredient2}</li>
-                    <li class="ingredientsLi">${mealIngredient3}</li>
-                    <li class="ingredientsLi">${mealIngredient4}</li>
-                    <li class="ingredientsLi">${mealIngredient5}</li>
-                    <li class="ingredientsLi">${mealIngredient6}</li>
-                    <li class="ingredientsLi">${mealIngredient7}</li>
-                    <li class="ingredientsLi">${mealIngredient8}</li>
-                    <li class="ingredientsLi">${mealIngredient9}</li>
-                    <li class="ingredientsLi">${mealIngredient10}</li>
-                    <li class="ingredientsLi">${mealIngredient11}</li>
-                    <li class="ingredientsLi">${mealIngredient12}</li>
-                    <li class="ingredientsLi">${mealIngredient13}</li>
-                    <li class="ingredientsLi">${mealIngredient14}</li>
-                    <li class="ingredientsLi">${mealIngredient15}</li>
-                    <li class="ingredientsLi">${mealIngredient16}</li>
-                    <li class="ingredientsLi">${mealIngredient17}</li>
-                    <li class="ingredientsLi">${mealIngredient18}</li>
-                    <li class="ingredientsLi">${mealIngredient19}</li>
-                    <li class="ingredientsLi">${mealIngredient20}</li>
                 </ul>
             </section>
 
@@ -86,6 +102,16 @@ function generateMeal() {
         `;
 
         mealDiv.innerHTML = html;
+
+        const ingredientsUl = document.querySelector(".ingredientsUl");
+
+        for (let i = 0; i < ingredientsArrNoNull.length; i++) {
+            let li = document.createElement("li");
+            li.setAttribute("class", "ingredientsLi");
+            ingredientsUl.appendChild(li);
+
+            li.innerHTML = li.innerHTML + ingredientsArrNoNull[i];
+        }
     };
 }
 
